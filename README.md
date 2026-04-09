@@ -6,7 +6,7 @@
 
 <br/>
 
-<img src="https://komarev.com/ghpvc/?username=hasanator3000&style=flat-square&color=161b22&label=visitors" alt="Profile Views" />
+<img src="https://komarev.com/ghpvc/?username=23ag1&style=flat-square&color=161b22&label=visitors" alt="Profile Views" />
 
 </div>
 
@@ -35,20 +35,20 @@ AI builder. Making tools I want to use.
 <!-- ═══════════════════ GITHUB STATS ═══════════════════ -->
 
 <div align="center">
-  <img height="160" src="https://github-readme-stats.vercel.app/api?username=hasanator3000&show_icons=true&hide_title=true&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&icon_color=58a6ff&ring_color=58a6ff&include_all_commits=true&count_private=true" />
-  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=hasanator3000&layout=compact&hide_title=true&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&langs_count=6" />
+  <img height="160" src="https://github-readme-stats.vercel.app/api?username=23ag1&show_icons=true&hide_title=true&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&icon_color=58a6ff&ring_color=58a6ff&include_all_commits=true&count_private=true" />
+  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=23ag1&layout=compact&hide_title=true&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&langs_count=6" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=hasanator3000&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D&ring=58a6ff&fire=58a6ff&currStreakLabel=c9d1d9&sideLabels=8b949e&sideNums=c9d1d9&currStreakNum=c9d1d9&dates=8b949e" />
+  <img src="https://streak-stats.demolab.com?user=23ag1&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D&ring=58a6ff&fire=58a6ff&currStreakLabel=c9d1d9&sideLabels=8b949e&sideNums=c9d1d9&currStreakNum=c9d1d9&dates=8b949e" />
 </div>
 
 <br/>
 
 <div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=hasanator3000&bg_color=0d1117&color=8b949e&line=58a6ff&point=c9d1d9&area=true&area_color=58a6ff&hide_border=true" width="95%" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=23ag1&bg_color=0d1117&color=8b949e&line=58a6ff&point=c9d1d9&area=true&area_color=58a6ff&hide_border=true" width="95%" />
 </div>
 
 <br/>
@@ -56,8 +56,8 @@ AI builder. Making tools I want to use.
 <!-- ═══════════════════ PROJECTS ═══════════════════ -->
 
 <div align="center">
-  <a href="https://github.com/hasanator3000/ClawdOS">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=hasanator3000&repo=ClawdOS&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&icon_color=58a6ff" />
+  <a href="https://github.com/23ag1/ClawdOS">
+    <img src="https://github-readme-stats.vercel.app/api/pin/?username=23ag1&repo=ClawdOS&hide_border=true&bg_color=0d1117&title_color=c9d1d9&text_color=8b949e&icon_color=58a6ff" />
   </a>
 </div>
 
