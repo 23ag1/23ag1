@@ -1,25 +1,24 @@
 """Pack recorded frames into looping animated WebP: python pack.py <frames> <assets>
 
-Lossless: flat symbols on transparency compress better than lossy (and stay
-sharp). Frames are streamed, 200 RGBA frames at 2x won't fit in memory.
+ffmpeg, lossless: flat symbols on transparency compress better lossless than
+lossy and stay sharp, and ffmpeg streams frames (Pillow runs out of memory on
+480 frames at 2x). Identical neighbours are merged into longer frames.
 """
 
 import pathlib
+import subprocess
 import sys
-
-from PIL import Image
 
 frames, assets = map(pathlib.Path, sys.argv[1:3])
 for theme in ("dark", "light"):
-    n = len(list((frames / theme).glob("*.png")))
-    rest = (Image.open(frames / theme / f"{i}.png") for i in range(1, n))
-    Image.open(frames / theme / "0.png").save(
-        assets / f"hero-{theme}.webp",
-        save_all=True,
-        append_images=rest,
-        duration=45,  # the site's canvas ticks every 45 ms
-        loop=0,
-        lossless=True,
-        quality=30,
-        method=1,
+    subprocess.run(
+        [
+            "ffmpeg", "-v", "error", "-y",
+            "-framerate", "200/9",  # 45 ms per frame, the site's canvas tick
+            "-i", str(frames / theme / "%d.png"),
+            "-c:v", "libwebp_anim", "-lossless", "1", "-compression_level", "1",
+            "-pix_fmt", "bgra", "-loop", "0",
+            str(assets / f"hero-{theme}.webp"),
+        ],
+        check=True,
     )

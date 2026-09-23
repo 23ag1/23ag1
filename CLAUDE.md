@@ -6,19 +6,21 @@ The look is the 23ag.one signature ported to what a README allows.
 ## Stack
 
 - Markdown + the HTML subset GitHub allows in READMEs.
-- Hero: canvas page recorded with Playwright, packed to animated WebP (Pillow).
+- Hero: canvas page recorded with Playwright, packed to animated WebP (ffmpeg).
 - Year: Python 3.12 + fontTools → static SVG, refreshed daily by an Action.
 
 ## Architecture
 
 - `README.md` — hero, tagline, open-source list, year field, links.
-- `scripts/hero/hero.html` — the site's "bigwm" canvas + ASCII flock,
-  rewritten as a pure function of the frame number: "23AG" in Times New Roman
-  Bold filled with symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×`, symbol swaps and blinks,
-  two rainbow glint passes and one flash per 9 s loop, 7 lanes of birds.
-  Every event is laid out on the loop period, so the loop is seamless.
-- `scripts/hero/record.mjs` → PNG frames (2x); `scripts/hero/pack.py` →
-  `assets/hero-{dark,light}.webp`, lossless, 45 ms per frame like the site.
+- `scripts/hero/hero.html` — the site's sky row 1:1, scaled ×0.598 to the
+  README column: 7 ASCII birds on the left (one per row, 32 columns, whole
+  birds only), the "bigwm" canvas on the right — symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×`
+  on a grid of height/22, masked to "23AG" in Times New Roman Bold; symbol
+  swaps, blinks, 4 glint passes and 3 colour flashes per 21.6 s loop. Every
+  event is laid out on the loop period, so the loop is seamless. The image is
+  cut to the flock's height (the site's canvas air reads as a hole here).
+- `scripts/hero/record.mjs` → PNG frames (2x); `scripts/hero/pack.py` (ffmpeg)
+  → `assets/hero-{dark,light}.webp`, lossless, 45 ms frames like the site.
   Re-run by hand only when the design changes.
 - `scripts/render.py` → `assets/year-{dark,light}.svg`: calendar via GraphQL,
   one symbol per day (`· ◦ + * ✦` by quartile), numbers in Times New Roman.
@@ -40,7 +42,7 @@ The look is the 23ag.one signature ported to what a README allows.
 
 ## Limits
 
-- Hero WebP is ~5 MB per theme (lossless, 200 frames at 2x).
+- Hero WebP is ~2.5 MB per theme (lossless, 480 frames at 2x).
 - On a phone everything scales to ~318 px; labels under numbers get small.
 - Streaks are counted inside the last 12 months only.
 - Local: `GITHUB_TOKEN=$(gh auth token) python3 scripts/render.py`;
