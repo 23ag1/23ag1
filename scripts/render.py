@@ -112,9 +112,9 @@ def text(face, s, size, x, y, opacity=1.0, anchor="start", tracking=0.0):
     return f'<path d="{face.path(s, size, x, y, tracking)}"{op}/>'
 
 
-def underline(face, s, size, x, y):
+def underline(face, s, size, x, y, tracking=0.0):
     """Browser-style underline, text-underline-offset: 4px (site CSS)."""
-    w = face.width(s, size)
+    w = face.width(s, size, tracking)
     thick = max(1.0, face.ul_thick * size)
     return f'<rect x="{x:.1f}" y="{y + 4:.1f}" width="{w:.1f}" height="{thick:.2f}"/>'
 
@@ -168,7 +168,7 @@ def row(name, desc=""):
     body = (
         dots(6)
         + text(BOLD, name, ns, PAD, y, tracking=-0.01)
-        + underline(BOLD, name, ns, PAD, y)
+        + underline(BOLD, name, ns, PAD, y, tracking=-0.01)
     )
     body += text(ROMAN, "→", 20, W - PAD, y, 0.35, anchor="end")
     lines = ROMAN.wrap(desc, ds, INNER - 60) if desc else []
