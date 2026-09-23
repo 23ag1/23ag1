@@ -102,11 +102,11 @@ def reel_defs(size):
 def font_face(family, file, text):
     font = TTFont(FONTS / file)
     opts = subset.Options()
-    opts.flavor = "woff2"
     opts.layout_features = ["kern", "liga", "tnum", "lnum"]
     sub = subset.Subsetter(opts)
     sub.populate(text=text)
     sub.subset(font)
+    font.flavor = "woff2"
     buf = io.BytesIO()
     font.save(buf)
     data = base64.b64encode(buf.getvalue()).decode()
