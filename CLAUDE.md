@@ -15,11 +15,12 @@ The look is the 23ag.one signature ported to what a README allows.
   link: hero, tagline, "Open source" + 4 project rows, "Last 12 months" +
   year, "Elsewhere" + 5 link rows, colophon. Markdown can't set a font, so all
   text is Times New Roman outlines; alt text carries the words.
-- `scripts/hero/hero.html` — the site's sky row as it lays out on a phone:
-  7 ASCII birds on top (one per row, 32 columns, centred, whole birds only),
-  "bigwm" below at full width — symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×` on a grid of
-  height/22 masked to "23AG" in Times New Roman Bold; symbol swaps, blinks,
-  4 glint passes and 3 colour flashes per 21.6 s seamless loop.
+- `scripts/hero/hero.html` — the site's sky row as it lays out on a phone,
+  compacted: 7 ASCII birds on top (16 px, one per row, 32 columns, centred,
+  whole birds only), "bigwm" below at full width — symbols on a grid of
+  height/30 (site: /22, denser here so the word reads heavier) masked to
+  "23AG" in Times New Roman Bold. 4 glint passes per 21.6 s loop; each pass
+  reshuffles the symbols it sweeps over; 3 colour flashes. Seamless loop.
 - `scripts/hero/record.mjs` → PNG frames (2x); `scripts/hero/pack.py` (ffmpeg)
   → `assets/hero-{dark,light}.webp`, lossless, 45 ms frames like the site.
   Re-run by hand only when the design changes.
@@ -40,8 +41,9 @@ The look is the 23ag.one signature ported to what a README allows.
 - Dark/light via `<picture>` + `prefers-color-scheme`.
 - No animated SVG: in `<img>` it repaints on the main thread every frame
   (measured: hero 73% of main thread at 4x CPU throttle). WebP decodes off it.
-- Symbol swaps happen only on flock ticks (150 ms): scattered per-frame
-  changes make every WebP frame full-size.
+- WebP weight = changed area per frame. Keep changes local: symbols swap only
+  inside the glint band, hue is fixed per pass, alpha is constant. Random swaps
+  over the whole word doubled the file (9 MB).
 - Times New Roman is not redistributable: never commit the font file.
 
 ## Limits

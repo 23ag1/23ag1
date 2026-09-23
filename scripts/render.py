@@ -125,14 +125,14 @@ def dots(y, opacity=0.22):
     n = int(INNER // pitch)
     x0 = PAD + (INNER - (n - 1) * pitch) / 2
     return "".join(
-        text(SYMBOLS, "·", 14, x0 + i * pitch - 2, y, opacity) for i in range(n)
+        text(SYMBOLS, "·", 12, x0 + i * pitch - 2, y, opacity) for i in range(n)
     )
 
 
 def flock_rule(y, opacity=0.45):
     """The block's top rule: a line of gliding birds, -·- (the site's 2px black rule)."""
     unit = "-·-"
-    size = 22
+    size = 17
     uw = SYMBOLS.width(unit, size) + size * 1.6
     n = int((INNER + size * 1.6) // uw)
     x0 = PAD + (INNER - (n * uw - size * 1.6)) / 2
@@ -143,48 +143,48 @@ def flock_rule(y, opacity=0.45):
 
 
 def tagline(s):
-    size, lh = 24.8, 24.8 * 1.45  # .tagline
-    lines = ROMAN.wrap(s, size, 560)  # max-width: 42ch
+    size, lh = 19, 19 * 1.45  # .tagline, compacted
+    lines = ROMAN.wrap(s, size, 440)  # max-width: 42ch
     body = "".join(
-        text(ROMAN, ln, size, PAD, 8 + size + i * lh, 0.65)
+        text(ROMAN, ln, size, PAD, 4 + size + i * lh, 0.65)
         for i, ln in enumerate(lines)
     )
-    return Block(8 + size + (len(lines) - 1) * lh + 16, body, s)
+    return Block(4 + size + (len(lines) - 1) * lh + 10, body, s)
 
 
 def head(title):
     """.block top: ASCII rule, then the bold heading with the site's spacing."""
-    size = 38.4  # .block__h, 2.4rem
-    body = flock_rule(20) + text(
-        BOLD, title, size, PAD, 20 + 42 + size * 0.8, tracking=-0.02
+    size = 28  # .block__h, compacted
+    body = flock_rule(14) + text(
+        BOLD, title, size, PAD, 14 + 26 + size * 0.8, tracking=-0.02
     )
-    return Block(20 + 42 + size * 0.8 + 30, body, title)
+    return Block(14 + 26 + size * 0.8 + 16, body, title)
 
 
 def row(name, desc=""):
     """.svc: bold underlined name, → on the right, description under it at .55."""
-    ns, ds, dlh = 24, 16.3, 16.3 * 1.45
-    y = 18 + ns * 0.8 + 6
+    ns, ds, dlh = 19, 16, 16 * 1.4
+    y = 12 + ns * 0.8 + 4
     body = (
         dots(6)
         + text(BOLD, name, ns, PAD, y, tracking=-0.01)
         + underline(BOLD, name, ns, PAD, y, tracking=-0.01)
     )
-    body += text(ROMAN, "→", 20, W - PAD, y, 0.35, anchor="end")
+    body += text(ROMAN, "→", 17, W - PAD, y, 0.35, anchor="end")
     lines = ROMAN.wrap(desc, ds, INNER - 60) if desc else []
     for i, ln in enumerate(lines):
-        body += text(ROMAN, ln, ds, PAD, y + 12 + ds + i * dlh, 0.55)
-    h = y + (12 + ds + (len(lines) - 1) * dlh if lines else 0) + 18
+        body += text(ROMAN, ln, ds, PAD, y + 8 + ds + i * dlh, 0.55)
+    h = y + (8 + ds + (len(lines) - 1) * dlh if lines else 0) + 10
     return Block(h, body, f"{name} — {desc}" if desc else name)
 
 
 def colophon():
-    size = 16.3
+    size = 16
     year = dt.date.today().year
     s = f"© {year} 23AG · Remote, worldwide"
-    body = flock_rule(20) + text(ROMAN, s, size, PAD, 20 + 36 + size, 0.45)
-    body += text(SYMBOLS, "~·~", 18, W - PAD, 20 + 36 + size, 0.45, anchor="end")
-    return Block(20 + 36 + size + 24, body, s)
+    body = flock_rule(14) + text(ROMAN, s, size, PAD, 14 + 24 + size, 0.45)
+    body += text(SYMBOLS, "~·~", 16, W - PAD, 14 + 24 + size, 0.45, anchor="end")
+    return Block(14 + 24 + size + 14, body, s)
 
 
 # ── year ────────────────────────────────────────────────────────────────────
@@ -277,7 +277,7 @@ def year(cal):
         (str(current), "days, current streak"),
     ]
     step = INNER / 53
-    top = 8
+    top = 4
     uses = []
     for wi, week in enumerate(weeks):
         for d in week["contributionDays"]:
@@ -288,15 +288,15 @@ def year(cal):
             x, y = PAD + wi * step + step / 2, top + wd * step + step / 2
             dim = ' opacity=".35"' if lvl == "NONE" else ""
             uses.append(f'<use href="#{lvl}" x="{x:.1f}" y="{y:.1f}"{dim}/>')
-    vy = top + 7 * step + 64
+    vy = top + 7 * step + 46
     body = f"<defs>{symbol_defs(11)}</defs>" + "".join(uses)
     for i, (value, label) in enumerate(stats):
         x = PAD + i * 18 * step
-        body += text(BOLD, value, 48, x, vy, tracking=-0.02) + text(
-            ROMAN, label, 16.3, x, vy + 28, 0.55
+        body += text(BOLD, value, 34, x, vy, tracking=-0.02) + text(
+            ROMAN, label, 16, x, vy + 24, 0.55
         )
     alt = f"{total} contributions in the last 12 months, longest streak {longest} days, current streak {current} days."
-    return Block(vy + 28 + 24, body, alt)
+    return Block(vy + 24 + 14, body, alt)
 
 
 # ── output ──────────────────────────────────────────────────────────────────
