@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
           sudo apt-get update -q && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q ttf-mscorefonts-installer
-      - run: pip install fonttools brotli
+      - run: pip install fonttools
       - run: python scripts/render.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

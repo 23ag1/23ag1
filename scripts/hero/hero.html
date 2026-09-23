@@ -2,10 +2,10 @@
 <meta charset="utf-8">
 <title>23AG hero — frame renderer</title>
 <!--
-  The 23ag.one sky row, 1:1: the ASCII flock on the left (7 birds, one per row,
-  32 columns), the "bigwm" canvas on the right — a field of symbols masked to
-  "23AG" in Times New Roman Bold. Geometry is the site's desktop layout
-  (1512 px viewport) scaled to the 798 px README column: S = 0.598.
+  The 23ag.one sky row as the site lays it out on a phone: the ASCII flock on
+  top (7 birds, one per row, 32 columns, centred), the "bigwm" canvas below at
+  full width — a field of symbols masked to "23AG" in Times New Roman Bold,
+  on the site's grid (height / 22, symbols at 0.8 of a cell).
 
   Rewritten as a pure function of the frame number so record.mjs can capture a
   seamless loop: every random event of the live site (symbol swaps, cells
@@ -15,7 +15,6 @@
 <style>body{margin:0;background:transparent}canvas{display:block}</style>
 <canvas id="c"></canvas>
 <script>
-const S = 0.598;
 const W = 846, PAD = 24;
 const DPR = 2;
 const FRAMES = 480;              // 45 ms per frame, as on the site → 21.6 s loop
@@ -32,23 +31,26 @@ const rg = () => (rnd() * GLYPHS.length) | 0;
 const tickFrame = (k) => Math.ceil(k * 10 / 3) % FRAMES;
 const onTick = () => tickFrame((rnd() * TICKS) | 0);
 
-// ── layout, from the site's CSS × S ──
-const SKY_FS = 25.6 * S, SKY_LH = SKY_FS * 1.75, SKY_COLS = 32, SKY_ROWS = 7;
+// ── layout: the site's mobile sky row (flock above, word full width) ──
+const SKY_FS = 22.4, SKY_LH = SKY_FS * 1.6, SKY_COLS = 32, SKY_ROWS = 7;   // .sky at ≤720 px
 const PITCH = SKY_FS * 0.6;                      // monospace advance of the site's <pre>
 const SKY_W = SKY_COLS * PITCH, SKY_H = SKY_ROWS * SKY_LH;
-const GAP = 48 * S;
-const CW = W - PAD * 2 - SKY_W - GAP;            // bigwm canvas
-const CH = 416 * S;                              // height: clamp(11rem, 32vw, 26rem) at 1512 px
+const GAP = 40;                                  // air between the flock and the word
+const CW = W - PAD * 2;
 
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
+const probe = document.createElement('canvas').getContext('2d');
+probe.font = '700 100px "Times New Roman"';
+// the site sizes the mask font as H·0.92 and caps it at 0.98·W; pick H so both meet
+const CH = Math.round(100 * CW * 0.98 / probe.measureText('23AG').width / 0.92);
 const field = document.createElement('canvas');   // the word is drawn off-screen, then placed
 field.width = Math.ceil(CW * DPR); field.height = Math.ceil(CH * DPR);
 const fx = field.getContext('2d');
 
 // ── the site's resize(): grid of symbol cells + mask font ──
-const STEP = Math.max(10 * S, Math.round(Math.min(CW / S, CH / S) / 22) * S);
-const GLYPH_FONT = `${Math.round(STEP / S * 0.8) * S}px "DejaVu Sans"`;
+const STEP = Math.max(10, Math.round(Math.min(CW, CH) / 22));
+const GLYPH_FONT = `${Math.round(STEP * 0.8)}px "DejaVu Sans"`;
 const cols = Math.ceil(CW / STEP), rows = Math.ceil(CH / STEP);
 const cells = [];
 for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
@@ -70,14 +72,12 @@ if (tw > CW * 0.98) fs *= (CW * 0.98) / tw;
 const MASK_FONT = `700 ${fs}px "Times New Roman"`;
 fx.font = MASK_FONT; fx.textBaseline = 'middle';
 const wm = fx.measureText('23AG');
-// the site's canvas is taller than the word; in a README that air reads as a hole,
-// so the image is cut to the taller of the flock and the word, both centred
+// the site's canvas has air above and below the word; here the image is cut to the word
 const WORD_H = wm.actualBoundingBoxAscent + wm.actualBoundingBoxDescent + STEP;
-const CONTENT_H = Math.max(SKY_H, WORD_H);
-const H = Math.ceil(CONTENT_H + PAD * 2);
-const SKY_X = PAD, SKY_Y = PAD + (CONTENT_H - SKY_H) / 2;   // .skyrow { align-items: center }
-const CX = PAD + SKY_W + GAP;
-const CY = PAD + CONTENT_H / 2 - (CH / 2 + (wm.actualBoundingBoxDescent - wm.actualBoundingBoxAscent) / 2);
+const H = Math.ceil(PAD + SKY_H + GAP + WORD_H + PAD);
+const SKY_X = (W - SKY_W) / 2, SKY_Y = PAD;      // .sky { align-self: center }
+const CX = PAD;
+const CY = PAD + SKY_H + GAP + WORD_H / 2 - (CH / 2 + (wm.actualBoundingBoxDescent - wm.actualBoundingBoxAscent) / 2);
 canvas.width = W * DPR; canvas.height = H * DPR;
 canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
 

@@ -7,23 +7,26 @@ The look is the 23ag.one signature ported to what a README allows.
 
 - Markdown + the HTML subset GitHub allows in READMEs.
 - Hero: canvas page recorded with Playwright, packed to animated WebP (ffmpeg).
-- Year: Python 3.12 + fontTools → static SVG, refreshed daily by an Action.
+- Text + year: Python 3.12 + fontTools → static SVGs, refreshed daily by an Action.
 
 ## Architecture
 
-- `README.md` — hero, tagline, open-source list, year field, links.
-- `scripts/hero/hero.html` — the site's sky row 1:1, scaled ×0.598 to the
-  README column: 7 ASCII birds on the left (one per row, 32 columns, whole
-  birds only), the "bigwm" canvas on the right — symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×`
-  on a grid of height/22, masked to "23AG" in Times New Roman Bold; symbol
-  swaps, blinks, 4 glint passes and 3 colour flashes per 21.6 s loop. Every
-  event is laid out on the loop period, so the loop is seamless. The image is
-  cut to the flock's height (the site's canvas air reads as a hole here).
+- `README.md` — only `<picture>` blocks (dark/light), each row wrapped in its
+  link: hero, tagline, "Open source" + 4 project rows, "Last 12 months" +
+  year, "Elsewhere" + 5 link rows, colophon. Markdown can't set a font, so all
+  text is Times New Roman outlines; alt text carries the words.
+- `scripts/hero/hero.html` — the site's sky row as it lays out on a phone:
+  7 ASCII birds on top (one per row, 32 columns, centred, whole birds only),
+  "bigwm" below at full width — symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×` on a grid of
+  height/22 masked to "23AG" in Times New Roman Bold; symbol swaps, blinks,
+  4 glint passes and 3 colour flashes per 21.6 s seamless loop.
 - `scripts/hero/record.mjs` → PNG frames (2x); `scripts/hero/pack.py` (ffmpeg)
   → `assets/hero-{dark,light}.webp`, lossless, 45 ms frames like the site.
   Re-run by hand only when the design changes.
-- `scripts/render.py` → `assets/year-{dark,light}.svg`: calendar via GraphQL,
-  one symbol per day (`· ◦ + * ✦` by quartile), numbers in Times New Roman.
+- `scripts/render.py` → every text block + the year (GraphQL calendar, one
+  symbol per day `· ◦ + * ✦`). Set like the site's CSS: `.tagline`, `.block__h`,
+  `.svc` (bold underlined name, → at .35, description at .55); ASCII instead
+  of rules: `-·-` rows for block tops, `·` rows for hairlines. Kerning from TNR.
 - `.github/workflows/hero.yml` — daily 03:17 UTC, manual dispatch, pushes to
   `scripts/**`; installs msttcorefonts; commits `assets/` only if changed.
 
@@ -32,7 +35,8 @@ The look is the 23ag.one signature ported to what a README allows.
 - Width 846 = README column on desktop; 24 px margins on every side, nothing
   may touch the image edge (check alpha bbox of frames).
 - Birds are drawn whole or not at all, like the site.
-- Minimum text size 16. No monospace fonts: symbols come from DejaVu Sans.
+- Minimum text size 16 (desktop). Times New Roman everywhere — the owner's explicit choice
+  for this page; symbols from DejaVu Sans.
 - Dark/light via `<picture>` + `prefers-color-scheme`.
 - No animated SVG: in `<img>` it repaints on the main thread every frame
   (measured: hero 73% of main thread at 4x CPU throttle). WebP decodes off it.
@@ -42,8 +46,8 @@ The look is the 23ag.one signature ported to what a README allows.
 
 ## Limits
 
-- Hero WebP is ~2.5 MB per theme (lossless, 480 frames at 2x).
-- On a phone everything scales to ~318 px; labels under numbers get small.
+- Hero WebP is ~5 MB per theme (lossless, 480 frames at 2x).
+- On a phone every image scales to ~318 px: all text shrinks to ~6 px.
 - Streaks are counted inside the last 12 months only.
 - Local: `GITHUB_TOKEN=$(gh auth token) python3 scripts/render.py`;
   hero: `node scripts/hero/record.mjs /tmp/frames && python3 scripts/hero/pack.py /tmp/frames assets`.
