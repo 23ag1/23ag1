@@ -1,10 +1,8 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
-  <img alt="23AG" src="assets/hero-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.webp">
+  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.webp">
+  <img alt="23AG" src="assets/hero-light.webp" width="100%">
 </picture>
-
-<img src="assets/dot.svg" width="12" height="12" alt=""> Taking on projects · Working remotely, worldwide
 
 23AG builds AI products and the interfaces around them — decided, designed and built in one place, for founders and small teams.
 

@@ -1,4 +1,4 @@
-name: Refresh graphics
+name: Refresh year
 
 on:
   schedule:
@@ -19,7 +19,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install fonttools brotli pillow
+      - name: Times New Roman
+        run: |
+          echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+          sudo apt-get update -q && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q ttf-mscorefonts-installer
+      - run: pip install fonttools brotli
       - run: python scripts/render.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
