@@ -16,8 +16,8 @@ The look is the 23ag.one signature ported to what a README allows.
   year, "Elsewhere" + 5 link rows, colophon. Markdown can't set a font, so all
   text is Times New Roman outlines; alt text carries the words.
 - `scripts/hero/hero.html` — the site's sky row as it lays out on a phone,
-  compacted: 7 ASCII birds on top (16 px, one per row, 32 columns, centred,
-  whole birds only), "bigwm" below at full width — symbols on a grid of
+  compacted: 7 ASCII birds on top (16 px, one per row, spread evenly over the
+  full width, one direction and speed so they never bunch; whole birds only), "bigwm" below at full width — symbols on a grid of
   height/30 (site: /22, denser here so the word reads heavier) masked to
   "23AG" in Times New Roman Bold. 4 glint passes per 21.6 s loop; each pass
   reshuffles the symbols it sweeps over; 3 colour flashes. Seamless loop.

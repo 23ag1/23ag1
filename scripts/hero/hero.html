@@ -32,8 +32,9 @@ const tickFrame = (k) => Math.ceil(k * 10 / 3) % FRAMES;
 const onTick = () => tickFrame((rnd() * TICKS) | 0);
 
 // ── layout: the site's mobile sky row (flock above, word full width) ──
-const SKY_FS = 16, SKY_LH = SKY_FS * 1.5, SKY_COLS = 32, SKY_ROWS = 7;      // .sky at ≤720 px, compacted
+const SKY_FS = 16, SKY_LH = SKY_FS * 1.5, SKY_ROWS = 7;                     // .sky at ≤720 px, compacted
 const PITCH = SKY_FS * 0.6;                      // monospace advance of the site's <pre>
+const SKY_COLS = Math.floor((W - PAD * 2) / PITCH);   // the sky spans the full width
 const SKY_W = SKY_COLS * PITCH, SKY_H = SKY_ROWS * SKY_LH;
 const GAP = 20;                                  // air between the flock and the word
 const CW = W - PAD * 2;
@@ -86,11 +87,16 @@ const passes = Array.from({ length: 4 }, () => {
 const HUE_DIR = rnd() < 0.5 ? 1 : -1;
 const FLASHES = [70, 215, 390];
 
-// ── flock: 7 birds, one per row; each drifts a whole number of wraps per loop ──
+// ── flock: 7 birds spread evenly over the full width, rows shuffled so they don't
+// line up as a staircase. All glide one way at one speed (exactly one wrap per loop),
+// so the spacing holds and they never bunch up; each flaps at its own pace.
 const WRAP = SKY_COLS + 3;
-const birds = Array.from({ length: SKY_ROWS }, (_, r) => ({
-  r, x0: rnd() * (SKY_COLS - 3), f: (rnd() * 6) | 0, sp: 1 + ((rnd() * 2) | 0),
-  vx: (rnd() < 0.5 ? -1 : 1) * (rnd() < 0.6 ? 1 : 2) * WRAP / TICKS // 0.24 or 0.49 col/tick
+const ROW_ORDER = [3, 0, 5, 2, 6, 1, 4];
+const DIR = rnd() < 0.5 ? -1 : 1;
+const birds = ROW_ORDER.map((r, i) => ({
+  r, x0: i * WRAP / ROW_ORDER.length + (rnd() - 0.5) * 3,
+  f: (rnd() * 6) | 0, sp: 1 + ((rnd() * 2) | 0),
+  vx: DIR * WRAP / TICKS                                   // ≈0.6 col per tick
 }));
 
 function on(c, f) { for (const [a, b] of c.off) if ((f >= a && f < b) || (f + FRAMES >= a && f + FRAMES < b)) return false; return true; }
