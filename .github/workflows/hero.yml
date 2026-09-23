@@ -1,4 +1,4 @@
-name: Refresh header
+name: Refresh graphics
 
 on:
   schedule:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install fonttools brotli
+      - run: pip install fonttools brotli pillow
       - run: python scripts/render.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

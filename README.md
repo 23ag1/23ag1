@@ -1,23 +1,31 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
-  <img alt="AG — AI builder. Making tools I want to use. Contribution calendar for the last 12 months." src="assets/hero-light.svg" width="100%">
+  <img alt="23AG" src="assets/hero-light.svg" width="100%">
 </picture>
 
-### What I'm building
+<img src="assets/dot.svg" width="12" height="12" alt=""> Taking on projects · Working remotely, worldwide
 
-**[ClawdOS](https://github.com/23ag1/ClawdOS)** — a self-hosted workspace for OpenClaw: tasks, news, dashboards, package tracking and a skill marketplace in one private web app.
+23AG builds AI products and the interfaces around them — decided, designed and built in one place, for founders and small teams.
 
-**[completely](https://github.com/23ag1/completely)** — a harness for autonomous coding agents. Deterministic gates and a default-fail evaluator: work counts as done only when it proves it.
+### Open source
 
-**[frontend-quality](https://github.com/23ag1/frontend-quality)** — a Claude Code plugin with a frontend standard: taste decisions, layout checks in a real browser, a catalogue of failure modes and performance profiling.
+**[ClawdOS](https://github.com/23ag1/ClawdOS)** — The web GUI & productivity workspace for OpenClaw — tasks, news, dashboards, package tracking, skill marketplace. Self-hosted & private.
 
-**[site-teardown-skill](https://github.com/23ag1/site-teardown-skill)** — takes any website apart into a build blueprint: stack, effects, design tokens, section-by-section plan.
+**[completely](https://github.com/23ag1/completely)** — Quality-first harness for autonomous AI coding agents — deterministic gates + a default-FAIL evaluator over a Beads task spine. Claude Code plugin; done is earned, not asserted.
 
-### Tools
+**[frontend-quality](https://github.com/23ag1/frontend-quality)** — Claude Code plugin: a frontend standard — taste decisions, layout checks in a real browser, a catalogue of failure modes, performance profiling attributed to functions.
 
-TypeScript, React, Next.js, Node.js, Python, PostgreSQL, Docker, Linux
+**[site-teardown-skill](https://github.com/23ag1/site-teardown-skill)** — Reverse engineers any website into a build blueprint: stack, effects, design tokens, section-by-section plan.
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/year-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/year-light.svg">
+  <img alt="Contribution calendar for the last 12 months, one symbol per day" src="assets/year-light.svg" width="100%">
+</picture>
 
 ### Elsewhere
 
-[23ag.one](https://23ag.one)
+[23ag.one](https://23ag.one) · [Lab](https://lab.23ag.one/) · [Telegram](https://t.me/a023aa23) · [X](https://x.com/23agdotone) · [Instagram](https://instagram.com/23ag.one)

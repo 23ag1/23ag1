@@ -1,39 +1,46 @@
 # 23ag1 — GitHub profile README
 
 Repository `23ag1/23ag1`: its README.md is shown on github.com/23ag1.
+The look is the 23ag.one signature ported to what a README allows.
 
 ## Stack
 
-- Markdown + HTML subset that GitHub allows in READMEs.
-- Python 3.12 + fontTools (+ brotli for woff2) for the generated header.
+- Markdown + the HTML subset GitHub allows in READMEs.
+- Python 3.12 + fontTools, brotli, Pillow for the generated SVGs.
 - GitHub Actions for the daily refresh.
 
 ## Architecture
 
-- `README.md` — header picture, projects, tools, links. Everything except the
-  header is plain text on purpose: readable on mobile, selectable, no services.
-- `scripts/render.py` — pulls the contribution calendar via GraphQL and writes
-  `assets/hero-dark.svg` and `assets/hero-light.svg`.
-- `scripts/fonts/` — static, Latin-subset instances of Unbounded SemiBold and
-  Golos Text (OFL licences alongside). Render subsets them again to the exact
-  glyphs used and embeds them as base64 woff2 — GitHub shows SVG through
-  `<img>`, where external fonts cannot load.
-- `.github/workflows/hero.yml` — daily at 03:17 UTC, on manual dispatch and on
+- `README.md` — hero, status line, tagline, open-source list, year field,
+  links. All text is real Markdown except numbers that must update daily.
+- `scripts/render.py` writes:
+  - `assets/hero-{dark,light}.svg` — "23AG" (Liberation Serif Bold = Times
+    metrics, as on the site) filled with a field of symbols `* + · ✦ ⋆ ◦ ° ∘ : ✳ • ×`;
+    cells twinkle (CSS), some swap symbols (SMIL `href`), a rainbow glint
+    sweeps through (masked moving gradient), a full-colour flash every 11 s,
+    and a flock of ASCII birds `\·/ ~·~ -·- /·\` flapping across the sky.
+    Fixed random seed, so daily runs don't churn it.
+  - `assets/year-{dark,light}.svg` — contribution calendar via GraphQL, one
+    symbol per day (`· ◦ + * ✦` by quartile), same glint, three numbers.
+  - `assets/dot.svg` — pulsing green status dot.
+- `scripts/fonts/` — subsets of Liberation Serif Bold, DejaVu Sans (symbols
+  only) and Golos Text, with licences. Glyphs become outline paths; Golos is
+  embedded as woff2 for the 16 px labels. `<img>` SVGs can't load fonts or JS.
+- `.github/workflows/hero.yml` — daily 03:17 UTC, manual dispatch, and on
   pushes to `scripts/**`; commits `assets/` only if it changed.
 
 ## Conventions
 
-- Colour: avatar pink `#DF769B`; grey tokens follow GitHub's own dark/light
-  palette so the header sits on the page without a box.
-- SVG width 846 = README column width on desktop, 1 unit = 1 CSS px.
-  Minimum text size 16. No monospace fonts anywhere.
-- Dark/light switch through `<picture>` + `prefers-color-scheme`.
-- No third-party badge services: the old ones died (readme-stats 503,
+- SVG width 846 = README column on desktop, 1 unit = 1 CSS px.
+- Minimum text size 16. No monospace fonts: symbols are drawn as paths.
+- Dark/light via `<picture>` + `prefers-color-scheme`.
+- No third-party badge services — the old ones died (readme-stats 503,
   activity-graph 402) and left broken images.
+- `prefers-reduced-motion` stops every animation.
 
 ## Limits
 
-- On a phone the header scales down to ~318 px, so its 16 px labels become
-  ~6 px. The numbers and grid stay legible; the text below is real Markdown.
-- Streaks are counted inside the last 12 months only (calendar window).
+- On a phone the SVGs scale to ~318 px: the word and field still read, the
+  16 px labels under the numbers become small. Everything else is Markdown.
+- Streaks are counted inside the last 12 months only.
 - Run locally: `GITHUB_TOKEN=$(gh auth token) python3 scripts/render.py`.
