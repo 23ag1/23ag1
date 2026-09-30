@@ -13,7 +13,7 @@ The look is the 23ag.one signature ported to what a README allows.
 
 - `README.md` — only `<picture>` blocks (dark/light), each row wrapped in its
   link: hero, tagline, "Open source" + 4 project rows, "Last 12 months" +
-  year, "Elsewhere" + 5 link rows, colophon. Markdown can't set a font, so all
+  year, "Elsewhere" + 6 link rows, colophon. Markdown can't set a font, so all
   text is Times New Roman outlines; alt text carries the words.
 - `scripts/hero/hero.html` — the site's sky row as it lays out on a phone,
   compacted: 7 ASCII birds on top (16 px, one per row, spread evenly over the

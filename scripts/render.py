@@ -303,10 +303,6 @@ def year(cal):
 
 PROJECTS = [
     (
-        "ClawdOS",
-        "The web GUI & productivity workspace for OpenClaw — tasks, news, dashboards, package tracking, skill marketplace. Self-hosted & private.",
-    ),
-    (
         "completely",
         "Quality-first harness for autonomous AI coding agents — deterministic gates + a default-FAIL evaluator over a Beads task spine. Claude Code plugin; done is earned, not asserted.",
     ),
@@ -315,12 +311,17 @@ PROJECTS = [
         "Claude Code plugin: a frontend standard — taste decisions, layout checks in a real browser, a catalogue of failure modes, performance profiling attributed to functions.",
     ),
     (
+        "ink-wash-painting",
+        "Claude skill that paints Chinese ink-wash of any subject as live WebGL2 art — paper, water and brush simulated in shaders, a new renderer for every picture.",
+    ),
+    (
         "site-teardown-skill",
         "Reverse engineers any website into a build blueprint: stack, effects, design tokens, section-by-section plan.",
     ),
 ]
 ELSEWHERE = [
     ("23ag.one", "AI Products, Interfaces and the Systems Behind Them"),
+    ("Research", "Agents, local LLMs, speech and generative graphics — built out of interest"),
     ("Lab", "Interface experiments made without a brief"),
     ("Telegram", ""),
     ("X", ""),

@@ -16,14 +16,6 @@
   <img alt="Open source" src="assets/head-open-source-light.svg" width="100%">
 </picture>
 
-<a href="https://github.com/23ag1/ClawdOS">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/row-clawdos-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/row-clawdos-light.svg">
-  <img alt="ClawdOS" src="assets/row-clawdos-light.svg" width="100%">
-</picture>
-</a>
-
 <a href="https://github.com/23ag1/completely">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/row-completely-dark.svg">
@@ -37,6 +29,14 @@
   <source media="(prefers-color-scheme: dark)" srcset="assets/row-frontend-quality-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/row-frontend-quality-light.svg">
   <img alt="frontend-quality" src="assets/row-frontend-quality-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="https://github.com/23ag1/ink-wash-painting-skill">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/row-ink-wash-painting-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/row-ink-wash-painting-light.svg">
+  <img alt="ink-wash-painting" src="assets/row-ink-wash-painting-light.svg" width="100%">
 </picture>
 </a>
 
@@ -71,6 +71,14 @@
   <source media="(prefers-color-scheme: dark)" srcset="assets/row-23ag-one-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/row-23ag-one-light.svg">
   <img alt="23ag.one" src="assets/row-23ag-one-light.svg" width="100%">
+</picture>
+</a>
+
+<a href="https://research.23ag.one/">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/row-research-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/row-research-light.svg">
+  <img alt="Research" src="assets/row-research-light.svg" width="100%">
 </picture>
 </a>
 
